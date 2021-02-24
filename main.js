@@ -1,6 +1,8 @@
-const api={
-    key:"10794dda3982dc8ec8679ea6dde1d9fd",
-    baseurl:"https://api.openweathermap.org/data/2.5/", 
+function initial(){
+    fetch(`${config.baseurl}weather?q=delhi&units=metric&APPID=${config.key}`)
+    .then(weather=>{
+        return weather.json();
+    }).then(displayResults);
 }
 
 const searchbox=document.querySelector('.search-box');
@@ -14,7 +16,7 @@ function setQuery(event){
 };
 
 function getResults(query){
-    fetch(`${api.baseurl}weather?q=${query}&units=metric&APPID=${api.key}`)
+    fetch(`${config.baseurl}weather?q=${query}&units=metric&APPID=${config.key}`)
     .then(weather=>{
         return weather.json();
     }).then(displayResults);
@@ -51,3 +53,5 @@ function dateBuilder(d){
 
     return `${day}, ${date} ${month} ${year}`;
 };
+
+initial();
